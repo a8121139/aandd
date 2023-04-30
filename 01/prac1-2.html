@@ -11,25 +11,20 @@
     <script>
         function runButtonPressed() {
             var numbers = [];
-            //prac1-5〜 1から10までの数を順に10個挿入する
-            for(var i=1; i<11; i++){
-                numbers.push(i);
+            //prac1-2 乱数を10個挿入する
+            for(var i=0; i<10; i++){
+                var n = Math.floor(Math.random() * 100) + 1;
+                numbers.push(n);
             }
             show(numbers);
-            //prac1-5 全ての要素に10を足す
-            var n = 0;
-            for(var j=0; j<10; j++){
-                numbers[j] = numbers[n] + 10;
-                n = n + 1;
-            }
-            show(numbers);
+
         }
     </script>
 
 </head>
 
 <body>
-    <h1>prac1-5</h1>
+    <h1>prac1-2</h1>
     <button onclick="runButtonPressed()">run!</button>
     <p id="res"></p>
 </body>

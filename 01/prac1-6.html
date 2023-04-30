@@ -17,9 +17,10 @@
             }
             show(numbers);
             //prac1-5 全ての要素に10を足す
+            //prac1-6 全ての要素に10をかける
             var n = 0;
             for(var j=0; j<10; j++){
-                numbers[j] = numbers[n] + 10;
+                numbers[j] = numbers[n] * 10;
                 n = n + 1;
             }
             show(numbers);
@@ -29,7 +30,7 @@
 </head>
 
 <body>
-    <h1>prac1-5</h1>
+    <h1>prac1-6</h1>
     <button onclick="runButtonPressed()">run!</button>
     <p id="res"></p>
 </body>
