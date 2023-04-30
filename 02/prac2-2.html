@@ -10,21 +10,31 @@
 
     <script>
         function runButtonPressed() {
-            //prac2-1 10個の順数（１，２，３．．．の数列）を生成し，２番目と４番目を入れ替える
+            //prac2-2 10個の順数を生成し，n番目とm番目を入れ替える
+            //(nとmは乱数にて決定する)
             var numbers = [];
             createSequentialNumbers(numbers, 10);
+
+            var x = Math.floor(Math.random() * 10);
+            var y;
+            do {
+                y = Math.floor(Math.random() * 10);
+            } while (y == x);
+
+            var num = numbers[x];
+            numbers[x] = numbers[y];
+            numbers[y] = num
+
             show(numbers);
 
-            numbers[1] = numbers[3];
-            numbers[3] = numbers[3] - 2;
-            show(numbers);
+            //prac2-3 prac2-2を20回繰り返す（シャッフルプログラムの完成）
         }
     </script>
 
 </head>
 
 <body>
-    <h1>prac2-1</h1>
+    <h1>prac2-2</h1>
     <button onclick="runButtonPressed()">run!</button>
     <p id="res"></p>
 </body>
