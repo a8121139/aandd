@@ -15,8 +15,9 @@
             createRandomNumbers(numbers, 10);
             show(numbers);
             var total = 0;
-            for(var i=0; i<10; i++){
-                total = total + numbers[i];
+            for(var i=0; i<numbers.length; i++){
+                var each = numbers[i];
+                total = total + each;
             }
             show(total);
         }

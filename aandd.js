@@ -44,3 +44,16 @@ function show(obj) {
         document.getElementById('res').insertAdjacentHTML('beforeend', string);
     }
 }
+
+function createOrderedRandomNumbers(numbers, n) {
+    var count = 0;
+    for (var i = 1; ; i++) {
+        if (Math.floor(Math.random() * 3) == 0) {
+            numbers.push(i);
+            count++;
+            if (count >= n) {
+                break;
+            }
+        }
+    }
+}
