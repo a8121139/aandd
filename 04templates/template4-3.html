@@ -9,11 +9,86 @@
     <script type="text/javascript" src="../jquery.min.js"></script>
 
     <script>
+        var numbers = [];
+
         function runButtonPressed() {
-            var numbers = [];
             createOrderedRandomNumbers(numbers, 20);
             show(numbers);
         }
+
+        function reserchButtonPressed() {
+            var answer = document.getElementById('tf').value;
+            //console.log(answer);
+            //console.log(numbers[19])
+
+            var startIndex = 10;
+
+            if(numbers[startIndex] < answer){ //真ん中より右側
+                for(var i=2; i<=5; i++){
+                    var mol = 2 ** i;
+                    var idou = 20 / mol; //移動幅
+                    console.log('idou=' + idou);
+
+                    var serchLeft = Math.floor(startIndex); //切り捨て
+                    var serchRight = Math.ceil(startIndex); //切り上げ
+
+                    console.log('startIndex=' + startIndex);
+                    console.log('numbers[serchLeft]=' + numbers[serchLeft]);
+                    console.log('numbers[serchRight]=' + numbers[serchRight]);
+
+                    if(numbers[serchLeft] == answer){ //移動先左
+                        var finIndex = serchLeft + 1;
+                        document.getElementById('result').innerHTML = '左から' + finIndex +'番目';
+                    } else if(numbers[serchRight] == answer){ //移動先右
+                        var finIndex = serchRight + 1;
+                        document.getElementById('result').innerHTML = '左から' + finIndex +'番目';
+                    } else if(numbers[serchRight] < answer){ //なかったとき右
+                        startIndex = startIndex + idou;
+                    } else if(numbers[serchLeft] > answer){ //なかったとき左
+                        startIndex = startIndex - idou;
+                    }
+                }
+
+            } else if(numbers[startIndex] > answer){ //真ん中より左側
+                for(var i=2; i<=5; i++){
+                    var mol = 2 ** i;
+                    var idou = 20 / mol; //移動幅
+                    console.log('idou=' + idou);
+
+                    startIndex = startIndex - idou;
+                    var serchLeft = Math.floor(startIndex); //切り捨て
+                    var serchRight = Math.ceil(startIndex); //切り上げ
+
+                    console.log('startIndex=' + startIndex);
+                    console.log('numbers[serchLeft]=' + numbers[serchLeft]);
+                    console.log('numbers[serchRight]=' + numbers[serchRight]);
+
+                    if(numbers[serchLeft] == answer){
+                        var finIndex = serchLeft + 1;
+                        document.getElementById('result').innerHTML = '左から' + finIndex +'番目';
+                    } else if(numbers[serchRight] == answer){
+                        var finIndex = serchRight + 1;
+                        document.getElementById('result').innerHTML = '左から' + finIndex +'番目';
+                    } else if(numbers[serchRight] < answer){
+                        startIndex = startIndex + idou;
+                    } else if(numbers[serchLeft] < answer){
+                        startIndex = startIndex + idou;
+                    }
+                }
+
+            } else if(numbers[startIndex] == answer){ //ちょうど真ん中
+                var finIndex = startIndex + 1;
+                document.getElementById('result').innerHTML = '左から' + finIndex +'番目';
+
+            } 
+            
+            var resultElement = document.getElementById('result')
+            var resultLength = resultElement.textContent
+            if(resultLength == "."){
+                document.getElementById('result').innerHTML = 'その数字はありません'
+            }
+        }
+        
 
         //この関数を，aaandd.jsに加えてください．
         function createOrderedRandomNumbers(numbers, n) {
@@ -58,6 +133,9 @@
     <h1>ex4-3</h1>
     <button onclick="runButtonPressed()">run!</button>
     <p id="res"></p>
+    数字:<input id="tf" value="" type="textfield">
+    <button onclick="reserchButtonPressed()">探す</button>
+    <p id="result">.</p>
 </body>
 
 </html>
