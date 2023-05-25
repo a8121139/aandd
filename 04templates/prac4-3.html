@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script type="text/javascript" src="../aandd.js"></script>
+    <script type="text/javascript" src="../jquery.min.js"></script>
+
+    <script>
+        var numbers = [];
+
+        function runButtonPressed() {
+            createOrderedRandomNumbers(numbers, 20);
+            show(numbers);
+        }
+
+        function searchButtonPressed() {
+            var found = false;
+            var lower = 0;
+            var upper = numbers.length - 1;
+            var target = document.getElementById('tf').value;
+
+            for (var i = 0; i < 100; i++) {
+                var mid = Math.floor((lower + upper) / 2);
+                var a = upper - lower;
+
+                console.log("mid=" + mid)
+                console.log("numbers[mid]=" + numbers[mid])
+                console.log("a=" + a);
+
+                if (target == numbers[mid]) {
+                    found = true;
+                    break;
+                } else if (target < numbers[mid]) {
+                    upper = mid;
+                } else if (target > numbers[mid]) {
+                    lower = mid;
+                }
+
+                if (target == numbers[upper]) {
+                    found = true;
+                    break;
+                } else if (target == numbers[lower]) {
+                    found = true;
+                    break;
+                }
+            }
+
+            document.getElementById('result').innerHTML = found;
+        }
+
+
+        //この関数を，aaandd.jsに加えてください．
+        function createOrderedRandomNumbers(numbers, n) {
+            var count = 0;
+            for (var i = 1; ; i++) {
+                if (Math.floor(Math.random() * 3) == 0) {
+                    numbers.push(i);
+                    count++;
+                    if (count >= n) {
+                        break;
+                    }
+                }
+            }
+        }
+
+        //配列以外の変数を表示するために，aaandd.jsの中身を新しいshowに置き換えてください．
+        function show(obj) {
+            if (Array.isArray(obj)) {
+                var html = '';
+                html = html + '<table border="1">';
+                html = html + '<tr>';
+                for (var i = 0; i < obj.length; i++) {
+                    html = html + '<td>' + obj[i] + '</td>';
+                }
+                html = html + '</tr>';
+                html = html + '</table>';
+                //html = html + '<br>';
+                document.getElementById('res').insertAdjacentHTML('beforeend', html);
+            } else {
+                var string = JSON.stringify(obj);
+                string = string + '<br>';
+                document.getElementById('res').insertAdjacentHTML('beforeend', string);
+            }
+        }
+
+        //検索ボックス作ってrunで作った乱数の中に検索した数字があるか調べる
+    </script>
+
+</head>
+
+<body>
+    <h1>ex4-3</h1>
+    <button onclick="runButtonPressed()">run!</button>
+    <p id="res"></p>
+    数字:<input id="tf" value="" type="textfield">
+    <button onclick="searchButtonPressed()">serch!</button>
+    <p id="result">.</p>
+</body>
+
+</html>

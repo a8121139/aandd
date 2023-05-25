@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <script type="text/javascript" src="../aandd.js"></script>
+    <script type="text/javascript" src="../jquery.min.js"></script>
+
+    <script>
+        //バブルソート、選択ソート、挿入ソート
+        //バブルソート
+        var n = 10;
+        var numbers = [];
+        function runButtonPressed() {
+            createRandomNumbers(numbers, n);
+            show(numbers);
+            var startTime = new Date();
+            //処理            
+            //ここに，並び替えのプログラムを書く
+            //処理終わり
+            var endTime = new Date();
+            var time = endTime - startTime;
+            show(time + 'ミリ秒');
+        }
+
+        function AButtonPressed() {
+            //並べかえ1回分
+            for (var i = 0; i < n; i++) {
+                if (numbers[i] > numbers[i + 1]) {
+                    var m;
+                    m = numbers[i];
+                    numbers[i] = numbers[i + 1];
+                    numbers[i + 1] = m
+                }
+            }
+            show(numbers);
+        }
+
+        function BButtonPressed() {
+            //一気に並べる
+            var startTime = new Date();
+
+            for (var j = 0; j < n; j++) {
+                for (var i = 0; i < n; i++) {
+                    if (numbers[i] > numbers[i + 1]) {
+                        var m;
+                        m = numbers[i];
+                        numbers[i] = numbers[i + 1];
+                        numbers[i + 1] = m
+                    }
+                }
+            }
+            show(numbers);
+
+            var endTime = new Date();
+            var time = endTime - startTime;
+            show(time + 'ミリ秒');
+        }
+    </script>
+
+</head>
+
+<body>
+    <h1>時間の測定</h1>
+    <button onclick="runButtonPressed()">create!</button>
+    <button onclick="AButtonPressed()">1回</button>
+    <button onclick="BButtonPressed()">全部</button>
+    <p id="res"></p>
+</body>
+
+</html>
